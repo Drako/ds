@@ -18,16 +18,20 @@
 //
 
 #include <iostream>
+#include <boost/program_options.hpp>
 
 #include "config.hxx"
 
-int main(int argc, char ** argv)
+void show_version()
 {
     std::cout << "DragonScript Version " << ds::config::VERSION_MAJOR << "." << ds::config::VERSION_MINOR << "\n"
               << "Copyright (C) 2013, Felix Bytow <felix.bytow@googlemail.com>\n" << std::endl;
 
     std::cout << "Git-Hash:    " << ds::config::GIT_HASH << "\n"
               << "Git-Refspec: " << ds::config::GIT_REFSPEC << "\n" << std::endl;
+}
 
+int main(int argc, char ** argv)
+{
     return 0;
 }
