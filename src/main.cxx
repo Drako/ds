@@ -18,7 +18,11 @@
 //
 
 #include <iostream>
+#include <string>
+
+#include <boost/locale.hpp>
 #include <boost/program_options.hpp>
+#include <boost/filesystem.hpp>
 
 #include "config.hxx"
 
@@ -29,9 +33,66 @@ void show_version()
 
     std::cout << "Git-Hash:    " << ds::config::GIT_HASH << "\n"
               << "Git-Refspec: " << ds::config::GIT_REFSPEC << "\n" << std::endl;
+
+    std::cout << "Build-Type:  " << ds::config::BUILD_TYPE << "\n"
+              << "Prefix:      " << ds::config::INSTALL_PREFIX << "\n" << std::endl;
 }
 
 int main(int argc, char ** argv)
 {
+    using namespace std;
+    using namespace boost::locale;
+    using namespace boost::program_options;
+    using namespace boost::filesystem;
+
+    ////////////////////
+    // prepare locale //
+    ////////////////////
+    locale::global(locale(""));
+
+    generator   gen;
+
+    // path prefix(ds::config::INSTALL_PREFIX);
+    // gen.add_messages_path((prefix / "share" / "ds").native());
+    gen.add_messages_path(".");
+    gen.add_messages_domain("messages");
+
+    // locale loc = locale();
+    // cout << loc.name() << endl;
+
+    // locale syslocale = gen(loc.name());
+    // locale::global(syslocale);
+
+    // cout.imbue(syslocale);
+
+    // cout << syslocale.name() << endl;
+    locale::global(gen(""));
+    cout.imbue(locale());
+
+    //////////////////////////
+    // command line options //
+    //////////////////////////
+    options_description desc(gettext<char>("Allowed options").c_str());
+    desc.add_options()
+        ("help,?",    gettext<char>("produce help message").c_str())
+        ("version,v", gettext<char>("show version information").c_str())
+    ;
+
+    variables_map vm;
+    store(parse_command_line(argc, argv, desc), vm);
+    notify(vm);
+
+    if (vm.count("help"))
+    {
+        std::cout << desc << std::endl;
+        return 0;
+    }
+
+    if (vm.count("version"))
+    {
+        show_version();
+        return 0;
+    }
+
     return 0;
 }

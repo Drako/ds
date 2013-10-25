@@ -16,7 +16,7 @@ INCLUDE                ( C++11 )
 SET                    ( Boost_USE_MULTITHREADED  ON )
 SET                    ( Boost_USE_STATIC_LIBS    OFF )
 SET                    ( Boost_USE_STATIC_RUNTIME OFF )
-FIND_PACKAGE           ( Boost 1.54.0 COMPONENTS program_options REQUIRED )
+FIND_PACKAGE           ( Boost 1.54.0 COMPONENTS program_options locale filesystem system REQUIRED )
 
 # for config.hxx
 SET                    ( CMAKE_INCLUDE_CURRENT_DIR ON )

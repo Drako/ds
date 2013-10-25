@@ -28,8 +28,11 @@ namespace ds
         static unsigned const VERSION_MAJOR = 0;
         static unsigned const VERSION_MINOR = 1;
 
-        static char const GIT_REFSPEC[] = "@GIT_REFSPEC@";
-        static char const GIT_HASH[]    = "@GIT_HASH@";
+        static char const GIT_REFSPEC[]     = "@GIT_REFSPEC@";
+        static char const GIT_HASH[]        = "@GIT_HASH@";
+
+        static char const INSTALL_PREFIX[]  = "@CMAKE_INSTALL_PREFIX@";
+        static char const BUILD_TYPE[]      = "@CMAKE_BUILD_TYPE@";
     }
 }
 
