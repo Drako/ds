@@ -52,10 +52,10 @@ int main(int argc, char ** argv)
 
     generator   gen;
 
-    // path prefix(ds::config::INSTALL_PREFIX);
-    // gen.add_messages_path((prefix / "share" / "ds").native());
-    gen.add_messages_path(".");
-    gen.add_messages_domain("messages");
+    path prefix(ds::config::INSTALL_PREFIX);
+    gen.add_messages_path((prefix / "share" / "locale").native());
+    // gen.add_messages_path(".");
+    gen.add_messages_domain("DragonStack");
 
     // locale loc = locale();
     // cout << loc.name() << endl;
